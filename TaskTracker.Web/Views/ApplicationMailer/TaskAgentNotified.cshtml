@@ -1,0 +1,30 @@
+@model TaskTracker.ProjectManagement.TaskListDto
+
+<p class="subTitle">@L("TaskAssignedToYou"): @Model.Name</p>
+<div class="content">
+    <table>
+
+        <tr>
+            <td class="label">@L("Name"): </td>
+            <td>@Model.Name</td>
+        </tr>
+
+        <tr>
+            <td class="label">@L("EstimatedDays"): </td>
+            <td>@Model.EstimatedDays</td>
+        </tr>
+        
+        <tr>
+            <td class="label">@L("Notes"):</td>
+            <td>@Model.Description</td>
+        </tr>
+
+    </table>
+</div>
+
+<hr />
+
+
+<p>
+    @L("AgentEmailBottomMessage") : <a href="/TaskTracker#/project/agent"> Task Tracker</a>
+</p>

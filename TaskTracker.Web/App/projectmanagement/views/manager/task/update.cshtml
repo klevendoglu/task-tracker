@@ -1,0 +1,65 @@
+﻿<form name="form" role="form" novalidate class="form-validation">
+
+    <div class="modal-header">
+        <p class="lead">@L("UpdateTask")</p>
+    </div>
+
+    <div class="modal-body">
+        <div class="row">
+
+            <div class="col-sm-12">
+                <div class="form-group form-md-line-input form-md-floating-label no-hint">
+                    <input type="text" ng-model="vm.input.name" required class="form-control edited" />
+                    <label>@L("Name")</label>
+                </div>
+            </div>
+            
+                <div class="col-sm-6">
+                    <div class="form-group form-md-line-input form-md-floating-label no-hint">
+                        <select class="form-control edited" data-ng-options="agent.id as agent.fullName for agent in vm.agents" data-ng-model="vm.input.agentId"></select>
+                        <label>@L("Agent")</label>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group form-md-line-input form-md-floating-label no-hint">
+                        <input type="number" ng-model="vm.input.estimatedDays" required class="form-control edited" />
+                        <label>@L("EstimatedDays")</label>
+                    </div>
+                </div>
+            
+
+            <div class="col-sm-12">
+                <div class="form-group form-md-line-input form-md-floating-label no-hint">
+                    <textarea type="text" ng-model="vm.input.description" class="form-control edited" rows="5"></textarea>
+                    <label>@L("Description")</label>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="form-group form-md-line-input form-md-floating-label no-hint">
+                    <label class="col-md-3">@L("AttachmentsMultiAllowed")</label>
+                    <div class="col-md-9">
+                        <input type="file" class="btn btn-default" ngf-select="" ng-model="uploads" name="file" multiple>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-12">
+                <div>
+                    <ol>
+                        <li ng-repeat="taskAttachment in vm.taskAttachments">
+                           <a href="{{taskAttachment.attachment.url}}" target="_blank">{{taskAttachment.attachment.fileName}}</a>  <a href="#" ng-click="vm.DeleteTaskAttachment(taskAttachment.attachment, taskAttachment.id)"><i class="fa fa-trash-o"></i></a>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <div class="modal-footer">
+        <button ng-disabled="vm.saving" class="btn btn-default" ng-click="vm.Cancel()">@L("Cancel")</button>
+        <button button-busy="vm.saving" busy-text="@L("SavingWithThreeDot")" class="btn btn-primary blue" ng-click="vm.Save(uploads)" ng-disabled="form.$invalid"><i class="fa fa-save"></i> <span>@L("Save")</span></button>
+    </div>
+
+</form>

@@ -1,0 +1,81 @@
+﻿<form name="form" role="form" novalidate class="form-validate" ng-controller="widgets.agent.opentasks as vm">
+    <div class="portlet light" busy-if="vm.loading">
+        <div class="portlet-title">
+            <div class="caption">
+                <i class="icon-note font-yellow-gold"></i>
+                <span class="caption-subject bold font-yellow-gold uppercase">
+                    @L("SubTask")
+                </span>
+            </div>
+
+            <div class="tools">
+                <a href="" class="collapse" data-original-title="" title="">
+                </a>
+                <a href="" class="reload" data-original-title="Re-load" title="" ng-click="vm.getTasks()">
+                </a>
+                <a href="javascript:;" class="fullscreen" data-original-title="" title="">
+                </a>
+                <a href="" class="remove" data-original-title="" title="">
+                </a>
+            </div>
+            <div class="col-sm-12 col-sm-12">
+                <div class="page-toolbar pull-right">
+                    <div class="md-checkbox-list">
+                        <div class="md-checkbox">
+                            <input id="filter_TaskOpenOnly" class="md-check" type="checkbox"
+                                   name="filter_TaskOpenOnly" ng-click="vm.Filter()" ng-model="vm.openOnly">
+                            <label for="filter_TaskOpenOnly">
+                                <span class="inc"></span>
+                                <span class="check"></span>
+                                <span class="box"></span>
+                                @L("OpenOnly")
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+
+        </div>
+        <div class="portlet-body" style="display: block; height: auto;">
+            <div class="general-item-list">
+                <div ng-repeat="task in vm.tasks" class="item">
+                    <div class="item-head">
+                        <div class="item-details">
+                            <img class="item-pic" ng-if="task.creatorUser.profilePictureId" ng-src="/Profile/GetProfilePictureById?id={{task.creatorUser.profilePictureId}}" />
+                            <img class="item-pic" ng-if="!task.creatorUser.profilePictureId" src="~/Common/Images/default-profile-picture.png" />
+                            <a href="#" class="item-name primary-link">{{task.name}}</a>
+                            <span class="item-label">{{task.creatorUser.fullName}} @@ {{task.assignTime | date : 'MMM dd HH:mm'}}</span>
+                            <a href="#" ng-click="vm.ViewLogs(task.id)">
+                                <span class="badge bg-yellow-gold">
+                                    Logs: {{task.taskLogCount}}
+                                </span>
+                            </a>
+                            <span class="label label-sm label-success" ng-class="{ 'label-danger': task.isOpen }">{{vm.localize(task.statusText)}}</span>
+                        </div>
+                        <div class="item-status">
+                            <div class="form-group form-md-line-input" style="padding-top: 0;">
+                                <div class="btn-group pull-right">
+                                    <button type="button" class="btn btn-fit-height grey-salt dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="1000" data-close-others="true" aria-expanded="false">
+                                        @L("Actions") <i class="fa fa-angle-down"></i>
+                                    </button>
+                                    <ul class="dropdown-menu pull-right" role="menu">
+                                        <li>
+                                            <a href="#" ng-if="!row.entity.isClosed" ng-click="vm.CreateLog(task)">@L("CreateLog")</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item-body">
+                        {{task.description}} (Proje No: {{task.projectId}})
+                    </div>
+                </div>
+            </div>
+            <uib-pagination boundary-links="true" total-items="vm.totalItems" ng-model="vm.currentPage" items-per-page="vm.itemsPerPage" ng-if="vm.showPagination" class="pagination-sm" previous-text="&lsaquo;" next-text="&rsaquo;"
+                            first-text="&laquo;" last-text="&raquo;" ng-change="vm.getTasks()"></uib-pagination>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,20 @@
+﻿<form name="form" role="form" novalidate class="form-validation">
+
+    <div class="modal-header">
+        <p class="lead">{{vm.input.title}}</p>
+    </div>
+
+    <div class="modal-body">
+        
+                <div class="form-group form-md-line-input form-md-floating-label no-hint">
+                    <input type="text" ng-model="vm.input.title" required class="form-control" ng-class="{ 'edited': vm.input.title}" />
+                    <label>@L("Subject")</label>
+                </div>
+           
+    </div>
+    <div class="modal-footer">
+        <button ng-disabled="vm.saving" class="btn btn-default" ng-click="vm.Cancel()">@L("Cancel")</button>
+        <button button-busy="vm.saving" busy-text="@L("SavingWithThreeDot")" class="btn btn-primary blue" ng-click="vm.Save()" ng-disabled="form.$invalid"><i class="fa fa-save"></i> <span>@L("Save")</span></button>
+    </div>
+
+</form>

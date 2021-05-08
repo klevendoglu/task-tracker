@@ -1,0 +1,27 @@
+@model TaskTracker.NotifyPostOwnerOutput
+
+<div class="content">
+    <table>
+
+        <tr>
+            <td class="label">@L("Subject"): </td>
+            <td>@Model.Subject </td>
+        </tr>
+
+        <tr>
+            <td class="label">@L("Sender"): </td>
+            <td>@Model.Sender </td>
+        </tr>
+
+        <tr>
+            <td class="label">@L("EmailAddress"): </td>
+            <td>@Model.SenderEmail </td>
+        </tr>
+
+        <tr>
+            <td class="label">@L("Message"): </td>
+            <td>@Model.Message </td>
+        </tr>
+
+    </table>
+</div>

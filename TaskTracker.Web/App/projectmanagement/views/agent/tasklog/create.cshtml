@@ -1,0 +1,48 @@
+﻿
+<form name="form" role="form" novalidate class="form-validation">
+    <div class="modal-header">
+        <p class="lead">@L("CreateLog")</p>
+    </div>
+
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-sm-12">
+
+                <div class="form-group form-md-line-input form-md-floating-label no-hint">
+                    <textarea ng-model="vm.input.notes" class="form-control" rows="5"></textarea>
+                    <label>@L("Notes")</label>
+                </div>
+
+                <div class="form-group form-md-line-input form-md-floating-label no-hint">
+                    <div class="md-checkbox-list">
+                        <div class="md-checkbox">
+                            <input id="closeTask" class="md-check" type="checkbox"
+                                   name="closeTask" ng-model="vm.input.closeTask">
+                            <label for="closeTask">
+                                <span class="inc"></span>
+                                <span class="check"></span>
+                                <span class="box"></span>
+                                @L("CloseIt")
+                            </label>
+                        </div>
+                    </div>
+                </div>
+               
+
+                <div class="form-group form-md-line-input form-md-floating-label no-hint">
+                    <label class="col-md-3">@L("AttachmentsMultiAllowed")</label>
+                    <div class="col-md-9">
+                        <input type="file" class="btn btn-default" ngf-select="" ng-model="uploads" name="file" multiple>
+                    </div>                                       
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-footer">
+        <button ng-disabled="vm.saving" class="btn btn-default" ng-click="vm.Cancel()">@L("Cancel")</button>
+        <button button-busy="vm.saving" busy-text="@L("SavingWithThreeDot")" class="btn btn-primary blue" ng-click="vm.Save(uploads)" ng-disabled="form.$invalid"><i class="fa fa-save"></i> <span>@L("Save")</span></button>
+    </div>
+</form>

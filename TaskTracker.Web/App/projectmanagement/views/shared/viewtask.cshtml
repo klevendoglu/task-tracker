@@ -1,0 +1,46 @@
+﻿
+
+<div class="modal-header">
+    <p class="lead">
+        {{vm.output.name}}
+        <button class="btn btn-default pull-right" ng-click="vm.Cancel()">X</button>
+    </p>
+
+</div>
+
+<div class="modal-body">
+    <dl class="dl-horizontal">
+        <dt>Id</dt>
+        <dd>{{vm.output.id}}</dd>
+
+        <dt>@L("Name")</dt>
+        <dd>{{vm.output.name}}</dd>
+
+        <dt>@L("Creator")</dt>
+        <dd>{{vm.output.creatorUser.fullName}}</dd>
+
+        <dt>@L("Agent")</dt>
+        <dd>{{vm.output.agentUser.fullName}}</dd>
+
+        <dt>@L("EstimatedDays")</dt>
+        <dd>{{vm.output.estimatedDays}}</dd>
+
+        <dt>@L("TaskLogCount")</dt>
+        <dd>{{vm.output.taskLogCount}}</dd>
+
+        <dt>@L("Description")</dt>
+        <dd ng-bind-html="vm.output.description"></dd>
+
+        <dt>@L("Status")</dt>
+        <dd><span class="label label-sm label-success" ng-class="{'label-danger':vm.output.isOpen}">{{vm.Localize(vm.output.statusText)}}</span></dd>
+
+        <dt>@L("Attachment")</dt>
+        <dd>
+            <ol>
+                <li ng-repeat="attachment in vm.output.taskAttachments">
+                    <a href="{{attachment.attachment.url}}" target="_blank">{{attachment.attachment.fileName}}</a>
+                </li>
+            </ol>
+        </dd>
+    </dl>
+</div>

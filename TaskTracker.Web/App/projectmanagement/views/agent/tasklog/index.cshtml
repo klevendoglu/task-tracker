@@ -1,0 +1,81 @@
+<div>
+    <div class="modal-header">
+        <!-- BEGIN PAGE TITLE -->
+        <div class="page-title">
+            <h3>
+                {{vm.taskName}}
+                <button ng-disabled="vm.saving" class="btn btn-default pull-right" ng-click="vm.Cancel()">X</button>
+            </h3>
+        </div>
+        <!-- END PAGE TITLE -->
+
+    </div>
+    <div class="portlet light">
+        <div class="portlet-title">
+            <div class="inputs inputs-full-width">
+                <div class="portlet-input">
+                    <form class="ng-pristine ng-valid">
+                        <div class="input-group">
+                            <input ng-model="vm.filterText" auto-focus class="form-control" placeholder="@L("SearchWithThreeDot")" type="text">
+                            <span class="input-group-btn">
+                                <button ng-click="vm.Filter()" class="btn btn-default" type="submit"><i class="icon-magnifier"></i></button>
+                            </span>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="portlet-body">
+            <div busy-if="vm.loading">
+                <div class="timeline">
+                    <div class="timeline-item" ng-repeat="log in vm.taskLogs">
+                        <div class="timeline-badge">
+                            <img class="timeline-badge-userpic" ng-if="log.creatorUser.profilePictureId" ng-src="/Profile/GetProfilePictureById?id={{log.creatorUser.profilePictureId}}" />
+                            <img class="timeline-badge-userpic" ng-if="!log.creatorUser.profilePictureId" src="~/Common/Images/default-profile-picture.png" />
+                        </div>
+                        <div class="timeline-body">
+                            <div class="timeline-body-arrow">
+                            </div>
+                            <div class="timeline-body-head">
+                                <div class="timeline-body-head-caption">
+                                    <a href="javascript:;" class="timeline-body-title font-blue-madison">{{log.creatorUser.fullName}}</a>
+                                    <span class="timeline-body-time font-grey-cascade">{{ log.creationTime | date : 'medium' }}</span>
+                                </div>
+                                <div class="timeline-body-head-actions" ng-if="vm.userId == log.creatorUserId">
+                                    <div class="btn-group">
+                                        <button class="btn btn-circle btn-sm dropdown-toggle" type="button" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+                                            @L("Actions")  <i class="fa fa-angle-down"></i>
+                                        </button>
+                                        <ul class="dropdown-menu pull-right" role="menu">
+                                            <li>
+                                                <a href="#" ng-click="vm.Update(log)">@L("Update")</a>
+                                            </li>
+                                            <li>
+                                                <a href="#" ng-click="vm.Delete(log.id)">@L("Delete")</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="timeline-body-content">
+                                <span class="font-grey-cascade">
+                                    {{log.notes}}
+                                </span>
+
+                                <ol>
+                                    <li ng-repeat="logAttachment in log.taskLogAttachments">
+                                        <a href="{{logAttachment.attachment.url}}" target="_blank">{{logAttachment.attachment.fileName}}</a>
+                                    </li>
+                                </ol>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+

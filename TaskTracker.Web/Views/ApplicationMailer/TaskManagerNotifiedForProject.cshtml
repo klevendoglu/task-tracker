@@ -1,0 +1,38 @@
+@model TaskTracker.ProjectManagement.ProjectWithManagersListDto
+
+<p class="subTitle">@Model.Name</p>
+<div class="content">
+    <table>
+        <tr>
+            <td class="label">Proje Numarasý: </td>
+            <td>@Model.Id </td>
+        </tr>
+
+        <tr>
+            <td class="label">Kapatan Kullanýcý: </td>
+            <td>@Model.CreatorUser.FullName </td>
+        </tr>
+
+        <tr>
+            <td class="label">@L("Status"):</td>
+            <td>@L(Model.StatusText)</td>
+        </tr>
+
+        <tr>
+            <td class="label">@L("Notes"):</td>
+            <td>@Model.Description</td>
+        </tr>
+
+        <tr>
+            <td class="label">@L("Managers"):</td>
+            @foreach (var manager in Model.Managers)
+            {
+              <td>
+                  @manager.User.Name @manager.User.Surname,
+              </td>
+            }
+        </tr>
+
+    </table>
+</div>
+

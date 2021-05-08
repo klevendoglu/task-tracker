@@ -1,0 +1,26 @@
+<div class="portlet light">
+    <form name="form" role="form" novalidate class="form-validation form-horizontal">
+        
+        <div class="portlet-body form">
+            <h4>
+                @L("PersonalizeYourDashboard")
+            </h4>
+            <div class="md-checkbox-list row">
+                <div class="md-checkbox col-sm-4" ng-repeat="widget in vm.widgets">
+                    <input id="widget_{{widget.id}}" class="md-check" type="checkbox" name="{{role.roleName}}" ng-model="widget.isSelected">
+                    <label for="widget_{{widget.id}}">
+                        <span class="inc"></span>
+                        <span class="check"></span>
+                        <span class="box"></span>
+                        {{vm.Localize(widget.title)}}
+                    </label>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="modal-footer">
+            <button button-busy="vm.saving" busy-text="@L("SavingWithThreeDot")" class="btn btn-primary blue" ng-click="vm.save()" ng-disabled="form.$invalid"><i class="fa fa-save"></i> <span>@L("Save")</span></button>
+        </div>
+    </form>
+</div>

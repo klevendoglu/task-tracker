@@ -1,0 +1,106 @@
+﻿
+<form name="form" role="form" novalidate class="form-validation">
+    <div class="modal-header">
+        <p class="lead">
+            @L("UpdateProject")
+        </p>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="form-group form-md-line-input form-md-floating-label no-hint">
+                    <input type="text" ng-model="vm.input.name" required class="form-control edited" />
+                    <label>@L("Name")</label>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                    <div class="form-group form-md-line-input form-md-floating-label no-hint">
+                        <label>@L("Manager")</label>
+                        <ui-select multiple ng-model="vm.manager.selected" theme="bootstrap" ng-disabled="disabled">
+                            <ui-select-match>{{$item.fullName}}@*{{$item.fullName}}*@</ui-select-match>
+                            <ui-select-choices repeat="manager in vm.managers | filter: $select.search">
+                                <div ng-bind-html="manager.fullName | highlight: $select.search"></div>
+                                <small>
+                                    {{manager.emailAddress}}
+                                </small>
+                            </ui-select-choices>
+                        </ui-select>
+                    </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group form-md-line-input has-success">
+                    <a class="dropdown-toggle" id="StartTime" role="button" data-toggle="dropdown" data-target="#" href="#">
+                        <div class="input-group" style="padding-top: 0px;">
+                            <input type="text" class="form-control" data-ng-model="vm.input.startTime" required>
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                        </div>
+                    </a>
+                    <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                        <datetimepicker data-ng-model="vm.input.startTime"
+                                        data-datetimepicker-config="{ dropdownSelector: '#StartTime' }"></datetimepicker>
+                    </ul>
+                    <label>@L("StartTime")</label>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group form-md-line-input has-success">
+                    <a class="dropdown-toggle" id="EndTime" role="button" data-toggle="dropdown" data-target="#" href="#">
+                        <div class="input-group" style="padding-top: 0px;">
+                            <input type="text" class="form-control" data-ng-model="vm.input.endTime">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                        </div>
+                    </a>
+                    <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                        <datetimepicker data-ng-model="vm.input.endTime"
+                                        data-datetimepicker-config="{ dropdownSelector: '#EndTime' }"></datetimepicker>
+                    </ul>
+                    <label>@L("EndTime")</label>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="form-group form-md-line-input form-md-floating-label no-hint">
+                    <textarea type="text" ng-model="vm.input.description" class="form-control edited" rows="5"></textarea>
+                    <label>@L("Description")</label>
+                </div>
+            </div>
+            <div class="col-sm-12" ng-if="vm.input.isSystemAdmin">
+                <div class="form-group form-md-line-input form-md-floating-label no-hint">
+                    <div class="md-checkbox-list">
+                        <div class="md-checkbox">
+                            <input id="closeTask" class="md-check" type="checkbox"
+                                   name="closeTask" ng-model="vm.input.closeProject">
+                            <label for="closeTask">
+                                <span class="inc"></span>
+                                <span class="check"></span>
+                                <span class="box"></span>
+                                @L("CloseProject")
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-12">
+                <div class="form-group form-md-line-input form-md-floating-label no-hint">
+                    <label class="col-md-3">@L("AttachmentsMultiAllowed")</label>
+                    <div class="col-md-9">
+                        <input type="file" class="btn btn-default" ngf-select="" ng-model="uploads" name="file" multiple>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div>
+                    <ol>
+                        <li ng-repeat="projectAttachment in vm.projectAttachments">
+                            <a href="{{projectAttachment.attachment.url}}" target="_blank">{{projectAttachment.attachment.fileName}}</a>  <a href="#" ng-click="vm.DeleteProjectAttachment(projectAttachment.attachment, projectAttachment.id)"><i class="fa fa-trash-o"></i></a>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button ng-disabled="vm.saving" class="btn btn-default" ng-click="vm.Cancel()">@L("Cancel")</button>
+        <button button-busy="vm.saving" busy-text="@L("SavingWithThreeDot")" class="btn btn-primary blue" ng-click="vm.Save(uploads)" ng-disabled="form.$invalid || vm.manager.selected == null || !vm.manager.selected.length"><i class="fa fa-save"></i> <span>@L("Save")</span></button>
+    </div>
+</form>

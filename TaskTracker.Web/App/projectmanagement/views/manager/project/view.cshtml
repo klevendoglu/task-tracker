@@ -1,0 +1,50 @@
+﻿
+
+<div class="modal-header">
+    <p class="lead">
+        {{vm.output.name}}
+        <button class="btn btn-default pull-right" ng-click="vm.Cancel()">X</button>
+</p>
+
+</div>
+
+<div class="modal-body">
+    <dl class="dl-horizontal">
+        <dt>Id</dt>
+        <dd>{{vm.output.id}}</dd>
+
+        <dt>@L("Name")</dt>
+        <dd ng-bind-html="vm.output.name"></dd>
+
+        <dt>@L("Description")</dt>
+        <dd ng-bind-html="vm.output.description"></dd>
+
+        <dt>@L("Manager")</dt>
+        <dd>{{vm.output.managersText}}</dd>
+
+        <dt>@L("StartTime")</dt>
+        <dd>{{ vm.output.startTime | date:'medium' }}</dd>
+
+        <dt>@L("EndTime")</dt>
+        <dd>{{ vm.output.endTime | date:'medium' }}</dd>
+
+        <dt>@L("ClosingTime")</dt>
+        <dd>{{ vm.output.closingTime | date:'medium' }}</dd>
+
+        <dt>@L("Creator")</dt>
+        <dd>{{vm.output.creatorUser.fullName}}</dd>
+
+        <dt>@L("TaskCount")</dt>
+        <dd>{{vm.output.taskCount}}</dd>
+
+        <dt>@L("Attachment")</dt>
+        <dd>
+            <ol>
+                <li ng-repeat="attachment in vm.output.projectAttachments">
+                    <a href="{{attachment.attachment.url}}" target="_blank">{{attachment.attachment.fileName}}</a>
+                </li>
+            </ol>
+        </dd>
+
+    </dl>
+</div>

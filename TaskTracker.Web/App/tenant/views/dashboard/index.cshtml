@@ -1,0 +1,14 @@
+<div ng-controller="tenant.views.dashboard.index as vm">
+
+    <div class="row">
+        <div class="col-md-12 col-sm-12">
+            
+            <div ng-include="'/App/widgets/tasktracker_manager.cshtml'" ng-if="vm.isTaskManager && vm.showWidget(vm.widgets.TaskManagement)"></div>
+            
+            <div ng-include="'/App/widgets/agent_opentasks.cshtml'" ng-if="vm.isTaskAgent && vm.showWidget(vm.widgets.TaskAgent)"></div>
+
+            <div ng-include="'/App/widgets/todos.cshtml'"></div>
+
+        </div>                             
+    </div>
+</div>
